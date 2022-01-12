@@ -90,8 +90,99 @@ FROM EMPLOYEES
 WHERE FIRST_NAME<'Alberto'
 order by FIRST_NAME;
 
+-- Using between and. always the  lower limit first, then higher limit
 
+SELECT * FROM EMPLOYEES
+WHERE SALARY BETWEEN 10000 AND 20000;
 
+-- We can use operators also IN varchar columns
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME BETWEEN 'A' AND 'C'
+order by FIRST_NAME;  
+
+SELECT * FROM EMPLOYEES
+order by FIRST_NAME
+
+-- Using the IN operator. Here the order is not important
+SELECT * FROM EMPLOYEES
+WHERE SALARY IN (10000, 25000,17000);
+
+/* Using the like operator and it comes usualy with _ and %
+% mean zero or more characters
+_ mean one character
+*/
+
+--ALL THE FIRST NAME which sart with S
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME LIKE 'S%'; 
+
+--ALL THE FIRST NAME which end  with s
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME LIKE '%s'; 
+
+--ALL THE FIRST NAME which include am 
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME LIKE '%am%'; 
+
+-- The first_name which has d in second letter
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME LIKE '_d%';
+
+-- The first_name which has s in third letter
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME LIKE '__s%';
+
+/*
+Supose there is value in any column contain _  or %  ( example job_id)
+then how you to search for theses Letters?
+For example I need all the job_id which contain the string SA_ 
+*/
+
+SELECT JOB_ID 
+FROM  JOBS
+WHERE JOB_ID LIKE 'SA/_%' escape '/';
+
+-- Using is null operator
+
+SELECT first_name, COMMISSION_PCT
+FROM EMPLOYEES;
+
+-- Pick all the employes who doesnt have commesion
+SELECT * 
+FROM EMPLOYEES
+where COMMISSION_PCT is null; 
+
+/* COMMISSION_PCT=' ' is not correct 
+SELECT * 
+FROM EMPLOYEES
+where COMMISSION_PCT=null;
+*/
+
+-- Using not whic can be used in =  not like, not in , is not null , not between  and 
+
+-- All the employees that doesn´t have ID equal to 100 or 101
+SELECT * 
+FROM EMPLOYEES
+WHERE EMPLOYEE_ID NOT IN (100, 101);
+
+-- All the employees that have commission
+SELECT * 
+FROM EMPLOYEES
+where COMMISSION_PCT is not null;
+
+-- All the frist name which does not start with "S"
+SELECT * FROM EMPLOYEES
+WHERE FIRST_NAME not LIKE 'S%'; 
+
+-- Different ways to write "different". The next 2 queries are the same
+
+SELECT * 
+FROM employees
+WHERE DEPARTMENT_ID<>50;
+
+SELECT * 
+FROM employees
+WHERE DEPARTMENT_ID !=50;
 
 
 
