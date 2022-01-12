@@ -184,6 +184,27 @@ SELECT *
 FROM employees
 WHERE DEPARTMENT_ID !=50;
 
+-- Defining Conditions Using the Logical Operators ( and/ or /  not )
+
+-- AND requires both the component conditions to be true
+SELECT employee_id, last_name, job_id, salary, DEPARTMENT_ID
+FROM   employees
+WHERE  SALARY >= 10000
+AND    DEPARTMENT_ID=90;
+
+-- OR requires either component condition to be true
+SELECT employee_id, last_name, job_id, salary, DEPARTMENT_ID
+FROM   employees
+WHERE  SALARY >= 10000
+OR    DEPARTMENT_ID=90;
+
+-- 3 AND
+SELECT employee_id, last_name, job_id, salary, DEPARTMENT_ID,COMMISSION_PCT
+FROM   employees
+WHERE  SALARY > 2000
+AND    DEPARTMENT_ID in (60,90)
+AND COMMISSION_PCT is null
+
 
 
 
