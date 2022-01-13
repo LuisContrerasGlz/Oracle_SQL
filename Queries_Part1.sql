@@ -205,7 +205,27 @@ WHERE  SALARY > 2000
 AND    DEPARTMENT_ID in (60,90)
 AND COMMISSION_PCT is null
 
+/* Here the priorities in this select have are 2 conditions
+   First condition  JOB_ID = 'AD_PRES' and SALARY > 15000
+   Second condition JOB_ID = 'SA_REP'
+*/
 
+SELECT last_name, job_id, salary
+FROM   employees
+WHERE  JOB_ID = 'SA_REP'
+OR     JOB_ID = 'AD_PRES' AND    SALARY > 15000;
+
+--  Above and this query are the same  
+SELECT last_name, job_id, salary
+FROM   employees
+WHERE  JOB_ID = 'SA_REP'
+OR     (JOB_ID = 'AD_PRES' AND    SALARY > 15000);
+
+-- Whith parantheses () you can override and/or priorities
+SELECT last_name, job_id, salary
+FROM   EMPLOYEES
+WHERE  (job_id = 'SA_REP' OR     job_id = 'AD_PRES')
+AND    SALARY > 15000;
 
 
 
