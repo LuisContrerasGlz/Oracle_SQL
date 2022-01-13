@@ -297,4 +297,38 @@ SELECT DEPARTMENT_ID,first_name,salary
 FROM EMPLOYEES
 ORDER BY 1,3; 
 
+--Using SQL Row Limiting Clause in a Query
+
+SELECT employee_id, first_name
+FROM EMPLOYEES
+ORDER BY EMPLOYEE_ID
+FETCH first 5 ROWS ONLY;
+ 
+SELECT employee_id, first_name
+FROM EMPLOYEES
+ORDER BY EMPLOYEE_ID
+FETCH first 50 PERCENT ROWS ONLY;
+ 
+SELECT employee_id, first_name
+FROM employees
+ORDER BY EMPLOYEE_ID
+offset 5 ROWS FETCH NEXT 5 ROWS ONLY;
+
+SELECT employee_id, first_name
+FROM EMPLOYEES
+ORDER BY EMPLOYEE_ID
+offset 4 ROWS FETCH NEXT 50 PERCENT ROWS ONLY;
+
+--If multiple rows share the same value and we do this only the first 2 will appear ignoring the ones that have the same value
+SELECT EMPLOYEE_ID, first_name,SALARY
+FROM EMPLOYEES
+ORDER BY SALARY DESC
+FETCH FIRST 2 ROWS  only;
+
+-- For that we can use the TIES command which will bring them
+SELECT EMPLOYEE_ID,first_name, SALARY
+FROM EMPLOYEES
+ORDER BY SALARY DESC
+FETCH FIRST 2 ROWS  with TIES;
+
 
