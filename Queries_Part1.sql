@@ -228,5 +228,73 @@ WHERE  (job_id = 'SA_REP' OR     job_id = 'AD_PRES')
 AND    SALARY > 15000;
 
 
+-- Using order by 
+
+--Default order always ASC: Ascending 
+SELECT * FROM EMPLOYEES
+ORDER BY HIRE_DATE; 
+
+
+SELECT * FROM EMPLOYEES
+ORDER BY HIRE_DATE ASC; 
+
+-- Order by desc: Descending 
+SELECT * FROM EMPLOYEES
+ORDER BY HIRE_DATE desc; 
+
+-- Using where and order by
+SELECT * FROM EMPLOYEES
+WHERE DEPARTMENT_ID=90
+ORDER BY EMPLOYEE_ID;
+
+-- Null values in order by. By default null come last in Ascending order
+SELECT * FROM EMPLOYEES
+ORDER BY COMMISSION_PCT ; 
+
+---- By default null come first in Descending order
+SELECT * FROM EMPLOYEES
+ORDER BY COMMISSION_PCT desc 
+
+-- We can use NULLS FIRST to make null values appear first
+SELECT * FROM EMPLOYEES
+ORDER BY COMMISSION_PCT NULLS FIRST;
+
+-- We you can sort also using column alias
+SELECT FIRST_NAME n
+FROM EMPLOYEES
+ORDER BY N;
+
+-- We can sort by Expression
+SELECT EMPLOYEE_ID , SALARY, SALARY+100
+FROM EMPLOYEES
+order by SALARY+100;
+
+-- We can sort by column not in the select even but this is not logical 
+
+SELECT EMPLOYEE_ID , SALARY
+FROM EMPLOYEES
+order by DEPARTMENT_ID;
+
+-- We can also sort by more than one column
+
+SELECT DEPARTMENT_ID,first_name,salary
+FROM EMPLOYEES
+ORDER BY DEPARTMENT_ID,FIRST_NAME;
+
+SELECT DEPARTMENT_ID,first_name,salary
+FROM EMPLOYEES
+ORDER BY DEPARTMENT_ID ASC ,FIRST_NAME DESC ;
+
+
+-- We can sory by column number in the select
+
+-- Here 1 means the first column in select which is the DEPARTMENT_ID
+SELECT DEPARTMENT_ID,first_name,salary
+FROM EMPLOYEES
+ORDER BY 1; 
+
+SELECT DEPARTMENT_ID,first_name,salary
+FROM EMPLOYEES
+ORDER BY 1,3; 
 
 
