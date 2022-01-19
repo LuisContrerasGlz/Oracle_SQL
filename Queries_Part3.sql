@@ -110,3 +110,63 @@ SELECT TRIM (LEADING 'k' FROM 'khaled khudari') V  FROM DUAL;
 SELECT TRIM (TRAILING 'k' FROM 'khaled khudari') V  FROM DUAL; 
 
 SELECT TRIM ('  khaled       khudai  ') v  FROM DUAL;
+
+-- Number functions, take number and return number
+
+-- Round function
+
+-- If you didnt sepecify decimal places , then round without decimal 
+SELECT ROUND(10.5) FROM DUAL; 
+
+-- If you didnt sepecify decimal places , then round without decimal 
+SELECT ROUND(150.49) FROM DUAL;
+
+SELECT ROUND(10.48, 1) FROM DUAL;
+
+SELECT ROUND(10.499, 1) FROM DUAL;
+
+SELECT ROUND(10.499, 2) FROM DUAL;
+
+SELECT ROUND(10.493, 2) FROM DUAL;
+
+SELECT ROUND(55.993, 1) FROM DUAL;
+
+SELECT ROUND(55.993, -1) FROM DUAL;
+
+SELECT ROUND(55.493, -2) FROM DUAL;
+
+SELECT ROUND(555.493, -2) FROM DUAL;
+
+SELECT ROUND(570.493, -3) FROM DUAL;
+
+SELECT ROUND(470.493, -3) FROM DUAL;
+
+SELECT ROUND(1470.493, -2) FROM DUAL;
+
+-- Trunc function
+
+SELECT TRUNC(10.6565) FROM DUAL;
+
+SELECT TRUNC(10.6565, 2) FROM DUAL;
+
+SELECT TRUNC(998.6565, -2) FROM DUAL;
+
+SELECT TRUNC(9998.6565, -2) FROM DUAL;
+
+SELECT TRUNC(998.6565, -3) FROM DUAL;
+
+-- MOD FUNCTION, return the remainder of devision
+
+SELECT MOD(15,2) FROM DUAL;
+
+SELECT MOD(15,3) FROM DUAL;
+
+-- Mod function is often use to know if the number id odd or even by divided by 2 
+
+-- If return 0 then even
+SELECT MOD(100,2) FROM DUAL; 
+
+-- If return non zero value  then odd
+SELECT MOD(101,2) FROM DUAL; 
+
+
