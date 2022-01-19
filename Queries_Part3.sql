@@ -169,4 +169,120 @@ SELECT MOD(100,2) FROM DUAL;
 -- If return non zero value  then odd
 SELECT MOD(101,2) FROM DUAL; 
 
+-- Date functions, the default date format in oracle is DD-MON-RR
 
+SELECT FIRST_NAME, HIRE_DATE
+FROM EMPLOYEES;
+
+/*
+  rr fomrat:
+  in general if the value between  50-99 THIS return a 19xx year
+  A value between 0-49 will return a 20xx year
+*/
+
+-- Sysdate: sysdate is a function that return the current database server date and time 
+SELECT SYSDATE FROM DUAL;
+
+-- Using airthmetic operators with dates:
+
+-- Date + number = date
+
+-- Adding days
+SELECT SYSDATE, SYSDATE +3 FROM DUAL; 
+
+-- Date - number =date 
+
+SELECT SYSDATE, SYSDATE -3 FROM DUAL;
+
+-- Date - date = number of days
+
+SELECT EMPLOYEE_ID, SYSDATE, hire_date, SYSDATE- hire_date, round( SYSDATE- hire_date ) 
+FROM EMPLOYEES;
+
+-- Date+ number/24 = adding number of hours to date
+
+SELECT  SYSDATE+ 5/24   FROM DUAL;
+
+--Example: I need how many weeks the employees 'Adam' work till now
+
+SELECT EMPLOYEE_ID, FIRST_NAME, SYSDATE-HIRE_DATE "no of days" ,  (SYSDATE-HIRE_DATE)/7
+FROM EMPLOYEES
+WHERE FIRST_NAME='Adam';
+
+-- Months_between
+
+-- MONTHs_BETWEEN more Accurate than number of days/30
+SELECT EMPLOYEE_ID,FIRST_NAME, MONTHs_BETWEEN(SYSDATE, HIRE_DATE ), (SYSDATE-HIRE_DATE)/30
+FROM EMPLOYEES;
+
+
+-- If the date1 less than date 2, then result become negative
+SELECT EMPLOYEE_ID,FIRST_NAME, MONTHS_BETWEEN(HIRE_DATE,SYSDATE )
+FROM EMPLOYEES;
+
+-- Add_months
+
+SELECT EMPLOYEE_ID,FIRST_NAME,hire_date, add_months(hire_date,4) 
+FROM EMPLOYEES;
+
+SELECT EMPLOYEE_ID,FIRST_NAME,HIRE_DATE, ADD_MONTHS(HIRE_DATE,-2) 
+FROM EMPLOYEES;
+
+-- Next_day
+
+SELECT SYSDAte,NEXT_DAY(SYSDATE,'FRIDAY') FROM DUAL;
+
+SELECT SYSDATE,NEXT_DAY(SYSDATE,1) FROM DUAL;
+/* OR YOU CAN enter number from 1 to 7
+   note that 1='sunday' and continue till 7 ---NLS_DATE_LANGUAGE
+*/
+
+-- Last_day: pick the last date of the month 
+
+SELECT LAST_DAY(SYSDATE)  FROM DUAL;
+
+-- Example:
+/*
+display the employee number, first_name, hiredate,number of months employeed,
+six month review date, first friday after hire date
+for all employees who have been employeed for fewer than 150 months
+*/
+
+SELECT EMPLOYEE_ID, FIRST_NAME, HIRE_DATE, MONTHS_BETWEEN(SYSDATE,HIRE_DATE),
+ADD_MONTHS( hire_date,6), next_day(hire_date,'FRIDAY')
+FROM 
+EMPLOYEES
+WHERE MONTHS_BETWEEN(SYSDATE,HIRE_DATE)<150
+
+-- Round and trunc functions in date:
+
+SELECT EMPLOYEE_ID, 
+FIRST_NAME, 
+HIRE_DATE, 
+round(HIRE_DATE,'MONTH'),trunc(HIRE_DATE,'MONTH')
+FROM EMPLOYEES
+ORDER BY HIRE_DATE;
+
+SELECT EMPLOYEE_ID, 
+FIRST_NAME, 
+HIRE_DATE, 
+round(HIRE_DATE,'year'),trunc(HIRE_DATE,'year')
+FROM EMPLOYEES
+ORDER BY HIRE_DATE;
+
+-- Wecan make nested functions
+
+SELECT FIRST_NAME,UPPER(FIRST_NAME), SUBSTR(UPPER(FIRST_NAME),1,3), 
+lpad( SUBSTR(UPPER(first_name),1,3),10,'*')
+FROM EMPLOYEES;
+
+/*
+  Assume that there is column in table contain name with 3 segments.
+  We need to split the string 'ahmed ali naser' to first_name, middle_name, last_name using select stat.
+*/
+ SELECT 'ahmed ali naser' FULL_NAME,
+ SUBSTR('ahmed ali naser',1,INSTR('ahmed ali naser',' ',1,1)-1 ) FIRST_NAME,
+ SUBSTR('ahmed ali naser', INSTR('ahmed ali naser',' ',1,1)+1,
+ INSTR('ahmed ali naser',' ',1,2)-INSTR('ahmed ali naser',' ',1,1)  -1)  MIDDLE_NAME,
+ SUBSTR('ahmed ali naser', INSTR('ahmed ali naser',' ',1,2)+1) last_name
+ FROM DUAL;
